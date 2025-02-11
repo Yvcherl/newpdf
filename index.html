@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>PDF 查看器</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- 通过 URL 参数加载指定的 PDF 文件 -->
+  <iframe id="pdfFrame" src=""></iframe>
+  <script>
+    // 解析 URL 查询参数，获取名为 "file" 的参数值
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    const pdfFile = getQueryParam("file");
+    if (pdfFile) {
+      // 设置 iframe 的 src 为传入的 PDF 文件名
+      // 注意：文件名必须与仓库中实际文件的名称完全一致（区分大小写），
+      // 如果文件名中包含空格或特殊字符，URL 参数中需要进行 URL 编码
+      document.getElementById("pdfFrame").src = pdfFile;
+    } else {
+      // 如果没有传入 file 参数，可以设置一个默认的 PDF 文件（或者显示提示信息）
+      document.getElementById("pdfFrame").src = "Rockchip_Developer_Guide_Linux_Software_CN.pdf";
+    }
+  </script>
+</body>
+</html>
